@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Chart.js library from a CDN -->
+  </head>
+  <body>
+    <canvas id="chart"></canvas>
+
+    <script>
+      // Fetch the chart data from the server
+      fetch("/chart.js")
+        .then((response) => response.json())
+        .then((chartData) => {
+          const { sum1, sum2, sum3, sum4, sum5, sum6 } = chartData;
+
+          // Set the data for the chart
+          var data = {
+            labels: [
+              "Services",
+              "Sanction",
+              "Product Quality",
+              "Customer Satisfaction",
+              "Financial Benefits",
+              "Security",
+            ],
+            datasets: [
+              {
+                label: "Skills",
+                data: [sum1, sum2, sum3, sum4, sum5, sum6],
+                backgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#4BC0C0",
+                  "#9966FF",
+                  "#004961",
+                ],
+                hoverBackgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#4BC0C0",
+                  "#9966FF",
+                  "#004961",
+                ],
+              },
+            ],
+          };
+
+          // Get the canvas element
+          var ctx = document.getElementById("chart").getContext("2d");
+
+          // Create the chart
+          var myChart = new Chart(ctx, {
+            type: "pie",
+            data: data,
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              legend: {
+                position: "center",
+                labels: {
+                  fontColor: "red",
+                  fontSize: 26,
+                  fontStyle: "bold",
+                  boxWidth: 0,
+                  usePointStyle: true,
+                },
+              },
+            },
+          });
+        });
+    </script>
+  </body>
+</html>

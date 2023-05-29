@@ -1,0 +1,98 @@
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'localhost',        // MySQL server hostname
+  user: 'root',    // MySQL username
+  password: '',// MySQL password
+  database: 'food_order2' // MySQL database name
+});
+
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('Connected to MySQL database!');
+});
+
+connection.query('SELECT count(*) AS totalrows FROM feedbackdb', (err, result) => {
+  if (err) throw err;
+  const tr=result[0].totalrows;
+  
+});
+
+connection.query('SELECT SUM(service) AS sum1, SUM(quality) AS sum2, SUM(satisfy) AS sum3,SUM(benefit) AS sum4,SUM(security) AS sum5,SUM(sanction) AS sum6 FROM feedbackdb', (err, results) => {
+  if (err) throw err;
+
+  // Access the sums from the results
+  const sum1 =results[0].sum1/tr;
+  const sum2 = results[0].sum2/tr;
+  const sum3 = results[0].sum3/tr;
+  const sum4 = results[0].sum4/tr;
+  const sum5 = results[0].sum5/tr;
+  const sum6 = results[0].sum6/tr;
+
+  // Do something with the sums
+  
+});
+// console.log(`Sum of attribute1: ${sum1}`);
+//   console.log(`Sum of attribute2: ${sum2}`);
+//   console.log(`Sum of attribute3: ${sum3}`);
+//   console.log(`Sum of attribute3: ${sum4}`);
+//   console.log(`Sum of attribute3: ${sum5}`);
+//   console.log(`Sum of attribute3: ${sum6}`);
+//   console.log(`Sum of attribute3: ${tr}`);
+// Set the data for the chart
+var data = {
+    labels: [
+      "Services ",
+      "Sanction",
+      "Product Quality",
+      "Customer Satisfaction",
+      "Financial Benefits",
+      "Security",
+    ],
+    datasets: [
+      {
+        label: "Skills",
+        data: [sum1, sum2, sum3, sum4, sum5, sum6],
+        backgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#4BC0C0",
+          "#9966FF",
+          "#004961",
+        ],
+        hoverBackgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#4BC0C0",
+          "#9966FF",
+          "#004961",
+        ],
+      },
+    ],
+  };
+  
+  // Get the canvas element
+  var ctx = document.getElementById("chart").getContext("2d");
+  
+  // Create the chart
+  var myChart = new Chart(ctx, {
+    type: "pie",
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        position: "center",
+        labels: {
+          fontColor: "red", // change font color here
+          fontSize: 26, // change font size here
+          fontStyle: "bold",
+          boxWidth: 0,
+          usePointStyle: true,
+        },
+      },
+    },
+  });
+  

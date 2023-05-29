@@ -1,0 +1,18 @@
+{
+  "name": "lets-bid",
+  "version": "1.0.0",
+  "description": "In this course, you'll learn to Create a Complete Dynamic and Fully Functional Website using PHP prrogramming language and MySQL Database.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.3.0"
+  }
+}
